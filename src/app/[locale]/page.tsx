@@ -128,16 +128,19 @@ export default async function HomePage({ params }: HomePageProps) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionTitle title={home.ourProducts} subtitle={home.ourProductsSubtitle} />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {productCategories.map((cat) => (
-              <ProductCategoryCard
-                key={cat.slug}
-                locale={l}
-                slug={cat.slug}
-                name={cat.content[l].name}
-                description={cat.content[l].description}
-                image={cat.images.main}
-              />
-            ))}
+            {productCategories.map((cat) => {
+              const randomImage = cat.images.grid[Math.floor(Math.random() * cat.images.grid.length)];
+              return (
+                <ProductCategoryCard
+                  key={cat.slug}
+                  locale={l}
+                  slug={cat.slug}
+                  name={cat.content[l].name}
+                  description={cat.content[l].description}
+                  image={randomImage}
+                />
+              );
+            })}
           </div>
           <div className="mt-10 text-center">
             <Link
