@@ -207,7 +207,7 @@ export const homepageHighlights: Record<Locale, { icon: string; title: string; d
     {
       icon: "⚙️",
       title: "完整生产流程",
-      description: "压铸、钻孔、机加工、包装一体化，拥有3条生产线，200平方米厂房。",
+      description: "压铸、钻孔、机加工、包装一体化，拥有5条生产线，200平方米厂房。",
     },
     {
       icon: "✅",
@@ -237,15 +237,15 @@ export const homepageHighlights: Record<Locale, { icon: string; title: string; d
 // ============================================================
 export const statsTranslations: Record<Locale, { label: string; value: string }[]> = {
   en: [
-    { label: "Production Lines", value: "3" },
+    { label: "Production Lines", value: "5" },
     { label: "MOQ", value: "600 pcs" },
-    { label: "QC Staff", value: "2" },
+    { label: "QC Staff", value: "5" },
     { label: "Lead Time", value: "1 Month" },
   ],
   zh: [
-    { label: "生产线", value: "3" },
+    { label: "生产线", value: "5" },
     { label: "起订量", value: "600 件" },
-    { label: "质检人员", value: "2" },
+    { label: "质检人员", value: "5" },
     { label: "交货周期", value: "1 个月" },
   ],
 };
