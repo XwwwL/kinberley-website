@@ -9,7 +9,7 @@ import ImageCarousel from "@/components/ImageCarousel";
 import { type Locale, isValidLocale, locales } from "@/lib/i18n";
 import { getProductBySlug, getAllProductSlugs } from "@/data/products";
 import { productDetailTranslations, pageTranslations, productCardTranslations } from "@/data/translations";
-import { companyFacts } from "@/data/company";
+import { getProductSEO, BASE_URL, SITE_NAME } from "@/lib/seo";
 
 interface ProductPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -27,17 +27,33 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   const product = getProductBySlug(slug);
   if (!product) return { title: "Product Not Found" };
 
-  const isEn = locale === "en";
-  const name = product.content[locale].name;
+  const l = locale as Locale;
+  const isEn = l === "en";
+  const seo = getProductSEO(slug, l);
 
   return {
-    title: name,
-    description: product.content[locale].description,
+    title: seo.title,
+    description: seo.description,
+    alternates: {
+      canonical: `${BASE_URL}/${l}/products/${slug}`,
+      languages: {
+        en: `${BASE_URL}/en/products/${slug}`,
+        zh: `${BASE_URL}/zh/products/${slug}`,
+        "x-default": `${BASE_URL}/en/products/${slug}`,
+      },
+    },
     openGraph: {
-      title: isEn
-        ? `${name} | ${companyFacts.nameEn}`
-        : `${name} | ${companyFacts.nameZh}`,
-      description: product.content[locale].description,
+      title: seo.title,
+      description: seo.description,
+      type: "website",
+      locale: isEn ? "en_US" : "zh_CN",
+      siteName: SITE_NAME,
+      url: `${BASE_URL}/${l}/products/${slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo.title,
+      description: seo.description,
     },
   };
 }

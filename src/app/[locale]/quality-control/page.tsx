@@ -4,6 +4,7 @@ import SectionTitle from "@/components/SectionTitle";
 import QualityControlSection from "@/components/QualityControlSection";
 import CTASection from "@/components/CTASection";
 import { type Locale, isValidLocale } from "@/lib/i18n";
+import { qualityControlSEO, BASE_URL, SITE_NAME } from "@/lib/seo";
 import { companyFacts, localizedContent } from "@/data/company";
 import { qcTranslations } from "@/data/translations";
 
@@ -14,12 +15,30 @@ interface QCPageProps {
 export async function generateMetadata({ params }: QCPageProps): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
-  const isEn = locale === "en";
+  const l = locale as Locale;
+  const isEn = l === "en";
+  const seo = qualityControlSEO[l];
+
   return {
-    title: isEn ? "Quality Control" : "质量控制",
-    description: isEn
-      ? "Our quality control process: 100% inspection, visual inspection, function inspection, raw material traceability, and warehouse control procedures."
-      : "我们的质量控制流程：100% 全检、目视检验、功能检验、原材料可追溯和仓储控制程序。",
+    title: seo.title,
+    description: seo.description,
+    alternates: {
+      canonical: `${BASE_URL}/${l}/quality-control`,
+      languages: { en: `${BASE_URL}/en/quality-control`, zh: `${BASE_URL}/zh/quality-control`, "x-default": `${BASE_URL}/en/quality-control` },
+    },
+    openGraph: {
+      title: seo.title,
+      description: seo.description,
+      type: "website",
+      locale: isEn ? "en_US" : "zh_CN",
+      siteName: SITE_NAME,
+      url: `${BASE_URL}/${l}/quality-control`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo.title,
+      description: seo.description,
+    },
   };
 }
 

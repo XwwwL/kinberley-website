@@ -3,6 +3,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import SectionTitle from "@/components/SectionTitle";
 import ContactForm from "@/components/ContactForm";
 import { type Locale, isValidLocale } from "@/lib/i18n";
+import { contactSEO, BASE_URL, SITE_NAME } from "@/lib/seo";
 import { companyFacts } from "@/data/company";
 import { contactPageTranslations } from "@/data/translations";
 import AmapSection from "@/components/AmapSection";
@@ -14,12 +15,30 @@ interface ContactPageProps {
 export async function generateMetadata({ params }: ContactPageProps): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
-  const isEn = locale === "en";
+  const l = locale as Locale;
+  const isEn = l === "en";
+  const seo = contactSEO[l];
+
   return {
-    title: isEn ? "Contact Us" : "联系我们",
-    description: isEn
-      ? `Contact ${companyFacts.nameEn} for custom hardware buckles, buttons, and metal accessories. Located in Wenzhou, Zhejiang, China.`
-      : `联系${companyFacts.nameZh}，咨询定制五金扣件、纽扣和金属辅料。位于中国浙江温州。`,
+    title: seo.title,
+    description: seo.description,
+    alternates: {
+      canonical: `${BASE_URL}/${l}/contact`,
+      languages: { en: `${BASE_URL}/en/contact`, zh: `${BASE_URL}/zh/contact`, "x-default": `${BASE_URL}/en/contact` },
+    },
+    openGraph: {
+      title: seo.title,
+      description: seo.description,
+      type: "website",
+      locale: isEn ? "en_US" : "zh_CN",
+      siteName: SITE_NAME,
+      url: `${BASE_URL}/${l}/contact`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo.title,
+      description: seo.description,
+    },
   };
 }
 

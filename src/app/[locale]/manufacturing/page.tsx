@@ -4,6 +4,7 @@ import SectionTitle from "@/components/SectionTitle";
 import ManufacturingFlow from "@/components/ManufacturingFlow";
 import CTASection from "@/components/CTASection";
 import { type Locale, isValidLocale } from "@/lib/i18n";
+import { manufacturingSEO, BASE_URL, SITE_NAME } from "@/lib/seo";
 import { companyFacts } from "@/data/company";
 import { mfgTranslations } from "@/data/translations";
 
@@ -14,12 +15,30 @@ interface MfgPageProps {
 export async function generateMetadata({ params }: MfgPageProps): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
-  const isEn = locale === "en";
+  const l = locale as Locale;
+  const isEn = l === "en";
+  const seo = manufacturingSEO[l];
+
   return {
-    title: isEn ? "Manufacturing Capability" : "生产能力",
-    description: isEn
-      ? "Explore our manufacturing capabilities: die casting, drilling, machining, and packaging. 3 production lines, 200 m² facility in Wenzhou, China."
-      : "了解我们的生产能力：压铸、钻孔、机加工和包装。3条生产线，200平方米厂房，位于中国温州。",
+    title: seo.title,
+    description: seo.description,
+    alternates: {
+      canonical: `${BASE_URL}/${l}/manufacturing`,
+      languages: { en: `${BASE_URL}/en/manufacturing`, zh: `${BASE_URL}/zh/manufacturing`, "x-default": `${BASE_URL}/en/manufacturing` },
+    },
+    openGraph: {
+      title: seo.title,
+      description: seo.description,
+      type: "website",
+      locale: isEn ? "en_US" : "zh_CN",
+      siteName: SITE_NAME,
+      url: `${BASE_URL}/${l}/manufacturing`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo.title,
+      description: seo.description,
+    },
   };
 }
 

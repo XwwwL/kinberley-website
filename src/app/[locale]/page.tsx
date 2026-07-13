@@ -8,6 +8,7 @@ import ManufacturingFlow from "@/components/ManufacturingFlow";
 import QualityControlSection from "@/components/QualityControlSection";
 import CTASection from "@/components/CTASection";
 import { type Locale, isValidLocale } from "@/lib/i18n";
+import { homeSEO, BASE_URL, SITE_NAME } from "@/lib/seo";
 import { companyFacts } from "@/data/company";
 import { productCategories } from "@/data/products";
 import {
@@ -25,24 +26,29 @@ interface HomePageProps {
 export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
-  const isEn = locale === "en";
+  const l = locale as Locale;
+  const isEn = l === "en";
+  const seo = homeSEO[l];
 
   return {
-    title: isEn
-      ? `${companyFacts.nameEn} | Custom Hardware Buckles & Clothing Accessories Manufacturer`
-      : `${companyFacts.nameZh} | 五金装饰扣与服装辅料制造商`,
-    description: isEn
-      ? `${companyFacts.nameEn} manufactures hardware decorative buckles, clothing buttons, shoe buckles, bag hardware, brooches, coffee spoons and customized metal accessories with OEM and ODM service.`
-      : `${companyFacts.nameZh}主要生产五金装饰扣、服装纽扣、鞋扣、箱包五金、胸针、咖啡勺及各类定制金属辅料，支持 OEM、ODM 和来样定制服务。`,
+    title: seo.title,
+    description: seo.description,
+    alternates: {
+      canonical: isEn ? `${BASE_URL}/en` : `${BASE_URL}/zh`,
+      languages: { en: `${BASE_URL}/en`, zh: `${BASE_URL}/zh`, "x-default": `${BASE_URL}/en` },
+    },
     openGraph: {
-      title: isEn
-        ? `${companyFacts.nameEn} — Custom Hardware Manufacturer`
-        : `${companyFacts.nameZh} — 专业五金辅料制造商`,
-      description: isEn
-        ? "Manufacturing hardware buckles, buttons, and metal accessories for fashion, bags, and garments."
-        : "生产五金装饰扣、纽扣及金属辅料，服务于服装、箱包、鞋类及饰品行业。",
+      title: seo.title,
+      description: seo.description,
       type: "website",
       locale: isEn ? "en_US" : "zh_CN",
+      siteName: SITE_NAME,
+      url: isEn ? `${BASE_URL}/en` : `${BASE_URL}/zh`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo.title,
+      description: seo.description,
     },
   };
 }

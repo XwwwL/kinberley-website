@@ -3,6 +3,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import SectionTitle from "@/components/SectionTitle";
 import CTASection from "@/components/CTASection";
 import { type Locale, isValidLocale } from "@/lib/i18n";
+import { aboutSEO, BASE_URL, SITE_NAME } from "@/lib/seo";
 import { companyFacts, localizedContent, tableInfoTranslations } from "@/data/company";
 import { aboutTranslations } from "@/data/translations";
 
@@ -13,12 +14,30 @@ interface AboutPageProps {
 export async function generateMetadata({ params }: AboutPageProps): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
-  const isEn = locale === "en";
+  const l = locale as Locale;
+  const isEn = l === "en";
+  const seo = aboutSEO[l];
+
   return {
-    title: isEn ? "About Us" : "关于我们",
-    description: isEn
-      ? `Learn about ${companyFacts.nameEn} — a professional hardware decorative buckle and clothing button manufacturer in Wenzhou, China.`
-      : `了解${companyFacts.nameZh}——位于浙江温州的专业五金装饰扣与服装辅料制造商。`,
+    title: seo.title,
+    description: seo.description,
+    alternates: {
+      canonical: `${BASE_URL}/${l}/about`,
+      languages: { en: `${BASE_URL}/en/about`, zh: `${BASE_URL}/zh/about`, "x-default": `${BASE_URL}/en/about` },
+    },
+    openGraph: {
+      title: seo.title,
+      description: seo.description,
+      type: "website",
+      locale: isEn ? "en_US" : "zh_CN",
+      siteName: SITE_NAME,
+      url: `${BASE_URL}/${l}/about`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo.title,
+      description: seo.description,
+    },
   };
 }
 

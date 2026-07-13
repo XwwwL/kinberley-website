@@ -4,6 +4,7 @@ import SectionTitle from "@/components/SectionTitle";
 import ProductGrid from "@/components/ProductGrid";
 import CTASection from "@/components/CTASection";
 import { type Locale, isValidLocale } from "@/lib/i18n";
+import { productsOverviewSEO, BASE_URL, SITE_NAME } from "@/lib/seo";
 import { productsOverviewTranslations, pageTranslations } from "@/data/translations";
 
 interface ProductsPageProps {
@@ -13,18 +14,29 @@ interface ProductsPageProps {
 export async function generateMetadata({ params }: ProductsPageProps): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
-  const isEn = locale === "en";
+  const l = locale as Locale;
+  const isEn = l === "en";
+  const seo = productsOverviewSEO[l];
 
   return {
-    title: pageTranslations[locale as Locale].products,
-    description: isEn
-      ? "Browse our complete range of metal hardware products: coffee spoons, buttons, shoe buckles, bag hardware, brooches, clothing fasteners and more. Custom OEM/ODM available."
-      : "浏览我们的全系列金属五金产品：咖啡勺、纽扣、鞋扣、箱包五金、胸针、服装扣件等。支持 OEM/ODM 定制服务。",
+    title: seo.title,
+    description: seo.description,
+    alternates: {
+      canonical: `${BASE_URL}/${l}/products`,
+      languages: { en: `${BASE_URL}/en/products`, zh: `${BASE_URL}/zh/products`, "x-default": `${BASE_URL}/en/products` },
+    },
     openGraph: {
-      title: `${pageTranslations[locale as Locale].products} — Jinbolli Hardware`,
-      description: isEn
-        ? "Complete range of metal hardware accessories."
-        : "全系列金属五金辅料产品。",
+      title: seo.title,
+      description: seo.description,
+      type: "website",
+      locale: isEn ? "en_US" : "zh_CN",
+      siteName: SITE_NAME,
+      url: `${BASE_URL}/${l}/products`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo.title,
+      description: seo.description,
     },
   };
 }
