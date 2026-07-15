@@ -10,7 +10,7 @@ import CTASection from "@/components/CTASection";
 import { type Locale, isValidLocale } from "@/lib/i18n";
 import { homeSEO, BASE_URL, SITE_NAME } from "@/lib/seo";
 import { companyFacts } from "@/data/company";
-import { productCategories } from "@/data/products";
+import { productCategories, getProductContent } from "@/data/products";
 import {
   heroTranslations,
   homeTranslations,
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
   if (!isValidLocale(locale)) return {};
   const l = locale as Locale;
   const isEn = l === "en";
-  const seo = homeSEO[l];
+  const seo = homeSEO[l] ?? homeSEO["en"];
 
   return {
     title: seo.title,
@@ -58,11 +58,11 @@ export default async function HomePage({ params }: HomePageProps) {
   if (!isValidLocale(locale)) return null;
   const l = locale as Locale;
 
-  const hero = heroTranslations[l];
-  const home = homeTranslations[l];
-  const highlights = homepageHighlights[l];
-  const stats = statsTranslations[l];
-  const customItems = customItemsTranslations[l];
+  const hero = heroTranslations[l] ?? heroTranslations["en"];
+  const home = homeTranslations[l] ?? homeTranslations["en"];
+  const highlights = homepageHighlights[l] ?? homepageHighlights["en"];
+  const stats = statsTranslations[l] ?? statsTranslations["en"];
+  const customItems = customItemsTranslations[l] ?? customItemsTranslations["en"];
 
   return (
     <>
@@ -141,8 +141,8 @@ export default async function HomePage({ params }: HomePageProps) {
                   key={cat.slug}
                   locale={l}
                   slug={cat.slug}
-                  name={cat.content[l].name}
-                  description={cat.content[l].description}
+                  name={getProductContent(cat, l).name}
+                  description={getProductContent(cat, l).description}
                   image={randomImage}
                 />
               );

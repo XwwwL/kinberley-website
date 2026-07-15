@@ -15,8 +15,8 @@ export default function Header({ locale }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [productMenuOpen, setProductMenuOpen] = useState(false);
 
-  const nav = navTranslations[locale];
-  const productNav = productNavTranslations[locale];
+  const nav = navTranslations[locale] ?? navTranslations["en"];
+  const productNav = productNavTranslations[locale] ?? productNavTranslations["en"];
 
   const linkClass =
     "rounded px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-[#1a3a5c]";

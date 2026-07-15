@@ -1,9 +1,14 @@
 import type { Locale } from "@/lib/i18n";
 
+// Fallback to English for untranslated locales
+function fb<T>(dict: Record<string, T>, locale: string): T {
+  return dict[locale] ?? dict["en"];
+}
+
 // ============================================================
 // Navigation
 // ============================================================
-export const navTranslations: Record<Locale, Record<string, string>> = {
+export const navTranslations: Record<string, Record<string, string>> = {
   en: {
     home: "Home",
     about: "About Us",
@@ -25,7 +30,7 @@ export const navTranslations: Record<Locale, Record<string, string>> = {
 // ============================================================
 // Buttons
 // ============================================================
-export const buttonTranslations: Record<Locale, Record<string, string>> = {
+export const buttonTranslations: Record<string, Record<string, string>> = {
   en: {
     viewProducts: "View Products",
     viewDetails: "View Details",
@@ -51,7 +56,7 @@ export const buttonTranslations: Record<Locale, Record<string, string>> = {
 // ============================================================
 // Page titles & section labels
 // ============================================================
-export const pageTranslations: Record<Locale, Record<string, string>> = {
+export const pageTranslations: Record<string, Record<string, string>> = {
   en: {
     products: "Products",
     about: "About Us",
@@ -97,7 +102,7 @@ export const pageTranslations: Record<Locale, Record<string, string>> = {
 // ============================================================
 // Homepage hero
 // ============================================================
-export const heroTranslations: Record<Locale, { badge: string; title: string; subtitle: string }> = {
+export const heroTranslations: Record<string, { badge: string; title: string; subtitle: string }> = {
   en: {
     badge: "Hardware Decorative Buckle & Clothing Button Manufacturer",
     title: "Custom Hardware Buckles & Clothing Accessories Manufacturer",
@@ -115,7 +120,7 @@ export const heroTranslations: Record<Locale, { badge: string; title: string; su
 // ============================================================
 // Homepage sections
 // ============================================================
-export const homeTranslations: Record<Locale, Record<string, string>> = {
+export const homeTranslations: Record<string, Record<string, string>> = {
   en: {
     aboutTitle: "About Jinbolli Hardware",
     aboutSubtitle: "A professional hardware decorative buckle and clothing button manufacturer based in Wenzhou, Zhejiang, China.",
@@ -165,7 +170,7 @@ export const homeTranslations: Record<Locale, Record<string, string>> = {
 // ============================================================
 // Homepage highlights
 // ============================================================
-export const homepageHighlights: Record<Locale, { icon: string; title: string; description: string }[]> = {
+export const homepageHighlights: Record<string, { icon: string; title: string; description: string }[]> = {
   en: [
     {
       icon: "🏭",
@@ -235,7 +240,7 @@ export const homepageHighlights: Record<Locale, { icon: string; title: string; d
 // ============================================================
 // Homepage stats bar
 // ============================================================
-export const statsTranslations: Record<Locale, { label: string; value: string }[]> = {
+export const statsTranslations: Record<string, { label: string; value: string }[]> = {
   en: [
     { label: "Production Lines", value: "5" },
     { label: "MOQ", value: "600 pcs" },
@@ -253,7 +258,7 @@ export const statsTranslations: Record<Locale, { label: string; value: string }[
 // ============================================================
 // Homepage customization section
 // ============================================================
-export const customItemsTranslations: Record<Locale, { icon: string; title: string; desc: string }[]> = {
+export const customItemsTranslations: Record<string, { icon: string; title: string; desc: string }[]> = {
   en: [
     { icon: "🔧", title: "Private Mold", desc: "Custom mold development for exclusive products" },
     { icon: "📐", title: "3D Design", desc: "Auto CAD and 3D software design services" },
@@ -271,7 +276,7 @@ export const customItemsTranslations: Record<Locale, { icon: string; title: stri
 // ============================================================
 // Contact form
 // ============================================================
-export const contactFormTranslations: Record<Locale, Record<string, string>> = {
+export const contactFormTranslations: Record<string, Record<string, string>> = {
   en: {
     name: "Name",
     email: "Email",
@@ -321,7 +326,7 @@ export const contactFormTranslations: Record<Locale, Record<string, string>> = {
 // ============================================================
 // Product navigation names
 // ============================================================
-export const productNavTranslations: Record<Locale, { name: string; slug: string }[]> = {
+export const productNavTranslations: Record<string, { name: string; slug: string }[]> = {
   en: [
     { name: "Button", slug: "button" },
     { name: "Shoe Buckle", slug: "shoe-buckle" },
@@ -351,7 +356,7 @@ export const productNavTranslations: Record<Locale, { name: string; slug: string
 // ============================================================
 // Footer
 // ============================================================
-export const footerTranslations: Record<Locale, Record<string, string>> = {
+export const footerTranslations: Record<string, Record<string, string>> = {
   en: {
     products: "Products",
     quickLinks: "Quick Links",
@@ -381,7 +386,7 @@ export const footerTranslations: Record<Locale, Record<string, string>> = {
 // ============================================================
 // Quality control page
 // ============================================================
-export const qcTranslations: Record<Locale, Record<string, string>> = {
+export const qcTranslations: Record<string, Record<string, string>> = {
   en: {
     title: "Quality Control",
     subtitle: "Every product is inspected before it leaves our factory. We are committed to consistent quality and reliable delivery.",
@@ -411,7 +416,7 @@ export const qcTranslations: Record<Locale, Record<string, string>> = {
 // ============================================================
 // Manufacturing page
 // ============================================================
-export const mfgTranslations: Record<Locale, Record<string, string>> = {
+export const mfgTranslations: Record<string, Record<string, string>> = {
   en: {
     title: "Manufacturing Capability",
     subtitle: "Complete production workflow from raw materials to finished products under one roof.",
@@ -441,7 +446,7 @@ export const mfgTranslations: Record<Locale, Record<string, string>> = {
 // ============================================================
 // About page
 // ============================================================
-export const aboutTranslations: Record<Locale, Record<string, string>> = {
+export const aboutTranslations: Record<string, Record<string, string>> = {
   en: {
     title: "About Us",
     profileTitle: "Company Profile",
@@ -467,7 +472,7 @@ export const aboutTranslations: Record<Locale, Record<string, string>> = {
 // ============================================================
 // Contact page
 // ============================================================
-export const contactPageTranslations: Record<Locale, Record<string, string>> = {
+export const contactPageTranslations: Record<string, Record<string, string>> = {
   en: {
     title: "Contact Us",
     subtitle: "Get in touch with us for product inquiries, custom orders, or partnership opportunities.",
@@ -501,7 +506,7 @@ export const contactPageTranslations: Record<Locale, Record<string, string>> = {
 // ============================================================
 // Product detail page
 // ============================================================
-export const productDetailTranslations: Record<Locale, Record<string, string>> = {
+export const productDetailTranslations: Record<string, Record<string, string>> = {
   en: {
     productImage: "Product Image",
     replaceHint: "Replace with actual product photo",
@@ -521,7 +526,7 @@ export const productDetailTranslations: Record<Locale, Record<string, string>> =
 // ============================================================
 // Product overview page
 // ============================================================
-export const productsOverviewTranslations: Record<Locale, Record<string, string>> = {
+export const productsOverviewTranslations: Record<string, Record<string, string>> = {
   en: {
     title: "Our Products",
     subtitle: "Explore our complete range of metal hardware accessories. Each category can be customized to your specifications — from finish and size to logo and packaging.",
@@ -539,7 +544,7 @@ export const productsOverviewTranslations: Record<Locale, Record<string, string>
 // ============================================================
 // Breadcrumb
 // ============================================================
-export const breadcrumbTranslations: Record<Locale, Record<string, string>> = {
+export const breadcrumbTranslations: Record<string, Record<string, string>> = {
   en: {
     home: "Home",
     products: "Products",
@@ -561,7 +566,7 @@ export const breadcrumbTranslations: Record<Locale, Record<string, string>> = {
 // ============================================================
 // Product category card
 // ============================================================
-export const productCardTranslations: Record<Locale, Record<string, string>> = {
+export const productCardTranslations: Record<string, Record<string, string>> = {
   en: {
     learnMore: "Learn more",
   },
@@ -573,6 +578,6 @@ export const productCardTranslations: Record<Locale, Record<string, string>> = {
 // ============================================================
 // Helper: get translation function
 // ============================================================
-export function t(locale: Locale, key: string, dictionary: Record<Locale, Record<string, string>>): string {
+export function t(locale: Locale, key: string, dictionary: Record<string, Record<string, string>>): string {
   return dictionary[locale]?.[key] ?? dictionary["en"]?.[key] ?? key;
 }

@@ -6,7 +6,7 @@ interface QualityControlSectionProps {
 }
 
 export default function QualityControlSection({ locale }: QualityControlSectionProps) {
-  const qcData = localizedContent[locale].qualityControl;
+  const qcData = (localizedContent[locale] ?? localizedContent["en"]).qualityControl;
 
   return (
     <section>

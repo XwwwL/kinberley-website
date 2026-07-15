@@ -17,7 +17,7 @@ export default function ProductCategoryCard({
   description,
   image,
 }: ProductCategoryCardProps) {
-  const lt = productCardTranslations[locale];
+  const lt = productCardTranslations[locale] ?? productCardTranslations["en"];
 
   return (
     <Link

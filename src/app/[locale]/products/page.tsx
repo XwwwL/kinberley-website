@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: ProductsPageProps): Promise<M
   if (!isValidLocale(locale)) return {};
   const l = locale as Locale;
   const isEn = l === "en";
-  const seo = productsOverviewSEO[l];
+  const seo = productsOverviewSEO[l] ?? productsOverviewSEO["en"];
 
   return {
     title: seo.title,
@@ -46,8 +46,8 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
   if (!isValidLocale(locale)) return null;
   const l = locale as Locale;
 
-  const t = productsOverviewTranslations[l];
-  const pt = pageTranslations[l];
+  const t = productsOverviewTranslations[l] ?? productsOverviewTranslations["en"];
+  const pt = pageTranslations[l] ?? pageTranslations["en"];
 
   return (
     <>

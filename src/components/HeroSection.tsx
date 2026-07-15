@@ -7,8 +7,8 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ locale }: HeroSectionProps) {
-  const hero = heroTranslations[locale];
-  const btns = buttonTranslations[locale];
+  const hero = heroTranslations[locale] ?? heroTranslations["en"];
+  const btns = buttonTranslations[locale] ?? buttonTranslations["en"];
 
   return (
     <section className="relative flex min-h-[600px] items-center overflow-hidden bg-gradient-to-br from-[#0d1f33] via-[#1a3a5c] to-[#0d2847] sm:min-h-[650px]">

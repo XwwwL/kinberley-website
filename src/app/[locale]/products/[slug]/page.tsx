@@ -7,7 +7,7 @@ import ContactForm from "@/components/ContactForm";
 import CTASection from "@/components/CTASection";
 import ImageCarousel from "@/components/ImageCarousel";
 import { type Locale, isValidLocale, locales } from "@/lib/i18n";
-import { getProductBySlug, getAllProductSlugs } from "@/data/products";
+import { getProductBySlug, getAllProductSlugs, getProductContent } from "@/data/products";
 import { productDetailTranslations, pageTranslations, productCardTranslations } from "@/data/translations";
 import { getProductSEO, BASE_URL, SITE_NAME } from "@/lib/seo";
 
@@ -66,10 +66,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const product = getProductBySlug(slug);
   if (!product) notFound();
 
-  const content = product.content[l];
-  const pt = pageTranslations[l];
-  const dt = productDetailTranslations[l];
-  const lt = productCardTranslations[l];
+  const content = getProductContent(product, l);
+  const pt = pageTranslations[l] ?? pageTranslations["en"];
+  const dt = productDetailTranslations[l] ?? productDetailTranslations["en"];
+  const lt = productCardTranslations[l] ?? productCardTranslations["en"];
 
   return (
     <>

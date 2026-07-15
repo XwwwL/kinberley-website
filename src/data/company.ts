@@ -81,7 +81,7 @@ export const companyFacts = {
 // ============================================================
 // Localized content
 // ============================================================
-export const localizedContent: Record<Locale, {
+export const localizedContent: Record<string, {
   aboutIntro: string[];
   manufacturingWorkflow: { step: number; name: string; description: string }[];
   qualityControl: {
@@ -152,7 +152,7 @@ export const localizedContent: Record<Locale, {
 };
 
 // Table info
-export const tableInfoTranslations: Record<Locale, Record<string, string>> = {
+export const tableInfoTranslations: Record<string, Record<string, string>> = {
   en: {
     companyName: "Company Name",
     chineseName: "Chinese Name",

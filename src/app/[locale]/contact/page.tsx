@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: ContactPageProps): Promise<Me
   if (!isValidLocale(locale)) return {};
   const l = locale as Locale;
   const isEn = l === "en";
-  const seo = contactSEO[l];
+  const seo = contactSEO[l] ?? contactSEO["en"];
 
   return {
     title: seo.title,
@@ -47,7 +47,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
   if (!isValidLocale(locale)) return null;
   const l = locale as Locale;
 
-  const t = contactPageTranslations[l];
+  const t = contactPageTranslations[l] ?? contactPageTranslations["en"];
 
   return (
     <>

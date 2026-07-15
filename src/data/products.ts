@@ -18,7 +18,11 @@ export interface ProductCategory {
     main: string;
     grid: string[];
   };
-  content: Record<Locale, ProductLocalizedContent>;
+  content: Partial<Record<Locale, ProductLocalizedContent>> & { en: ProductLocalizedContent };
+}
+
+export function getProductContent(product: ProductCategory, locale: Locale): ProductLocalizedContent {
+  return product.content[locale] ?? product.content.en;
 }
 
 export const productCategories: ProductCategory[] = [

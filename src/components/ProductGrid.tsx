@@ -1,5 +1,5 @@
 import ProductCategoryCard from "./ProductCategoryCard";
-import { productCategories } from "@/data/products";
+import { productCategories, getProductContent } from "@/data/products";
 import { type Locale } from "@/lib/i18n";
 
 interface ProductGridProps {
@@ -19,8 +19,8 @@ export default function ProductGrid({ locale, title }: ProductGridProps) {
             key={cat.slug}
             locale={locale}
             slug={cat.slug}
-            name={cat.content[locale].name}
-            description={cat.content[locale].description}
+            name={getProductContent(cat, locale).name}
+            description={getProductContent(cat, locale).description}
             image={cat.images?.main}
           />
         ))}

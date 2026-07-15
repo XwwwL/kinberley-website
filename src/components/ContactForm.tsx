@@ -22,8 +22,8 @@ export default function ContactForm({ locale, compact = false }: ContactFormProp
     message: "",
   });
 
-  const productNav = productNavTranslations[locale];
-  const ft = contactFormTranslations[locale];
+  const productNav = productNavTranslations[locale] ?? productNavTranslations["en"];
+  const ft = contactFormTranslations[locale] ?? contactFormTranslations["en"];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

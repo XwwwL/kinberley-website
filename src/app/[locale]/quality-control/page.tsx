@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: QCPageProps): Promise<Metadat
   if (!isValidLocale(locale)) return {};
   const l = locale as Locale;
   const isEn = l === "en";
-  const seo = qualityControlSEO[l];
+  const seo = qualityControlSEO[l] ?? qualityControlSEO["en"];
 
   return {
     title: seo.title,
@@ -48,8 +48,8 @@ export default async function QualityControlPage({ params }: QCPageProps) {
   const l = locale as Locale;
   const isEn = l === "en";
 
-  const t = qcTranslations[l];
-  const qcData = localizedContent[l].qualityControl;
+  const t = qcTranslations[l] ?? qcTranslations["en"];
+  const qcData = (localizedContent[l] ?? localizedContent["en"]).qualityControl;
 
   return (
     <>

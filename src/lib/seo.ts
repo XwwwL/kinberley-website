@@ -12,7 +12,7 @@ interface PageSEO {
 }
 
 // --- Homepage ---
-export const homeSEO: Record<Locale, PageSEO> = {
+export const homeSEO: Record<string, PageSEO> = {
   en: {
     title: "Kinberley Hardware - Custom Metal Buckles & Garment Accessories Manufacturer",
     description:
@@ -26,7 +26,7 @@ export const homeSEO: Record<Locale, PageSEO> = {
 };
 
 // --- Products overview ---
-export const productsOverviewSEO: Record<Locale, PageSEO> = {
+export const productsOverviewSEO: Record<string, PageSEO> = {
   en: {
     title: "Custom Garment Accessories & Metal Hardware Products - Kinberley Hardware",
     description:
@@ -40,7 +40,7 @@ export const productsOverviewSEO: Record<Locale, PageSEO> = {
 };
 
 // --- About ---
-export const aboutSEO: Record<Locale, PageSEO> = {
+export const aboutSEO: Record<string, PageSEO> = {
   en: {
     title: "About Kinberley Hardware - China Metal Accessories Manufacturer",
     description:
@@ -54,7 +54,7 @@ export const aboutSEO: Record<Locale, PageSEO> = {
 };
 
 // --- Manufacturing ---
-export const manufacturingSEO: Record<Locale, PageSEO> = {
+export const manufacturingSEO: Record<string, PageSEO> = {
   en: {
     title: "Manufacturing Capabilities - Custom Metal Buckles & Accessories",
     description:
@@ -68,7 +68,7 @@ export const manufacturingSEO: Record<Locale, PageSEO> = {
 };
 
 // --- Quality Control ---
-export const qualityControlSEO: Record<Locale, PageSEO> = {
+export const qualityControlSEO: Record<string, PageSEO> = {
   en: {
     title: "Quality Control - Metal Garment Accessories Manufacturer",
     description:
@@ -82,7 +82,7 @@ export const qualityControlSEO: Record<Locale, PageSEO> = {
 };
 
 // --- Contact ---
-export const contactSEO: Record<Locale, PageSEO> = {
+export const contactSEO: Record<string, PageSEO> = {
   en: {
     title: "Contact Kinberley Hardware - Request a Custom Hardware Quote",
     description:
@@ -98,7 +98,7 @@ export const contactSEO: Record<Locale, PageSEO> = {
 // ============================================================
 // Product detail SEO — keyed by slug
 // ============================================================
-export const productDetailSEO: Record<string, Record<Locale, PageSEO>> = {
+export const productDetailSEO: Record<string, Record<string, PageSEO>> = {
   "coffee-spoons": {
     en: {
       title: "Custom Coffee Spoons Manufacturer - Metal Spoon Supplier",
@@ -222,7 +222,7 @@ export const productDetailSEO: Record<string, Record<Locale, PageSEO>> = {
 };
 
 // --- Default product SEO fallback ---
-export const defaultProductSEO: Record<Locale, PageSEO> = {
+export const defaultProductSEO: Record<string, PageSEO> = {
   en: {
     title: "Custom Metal Hardware Products - Kinberley Hardware",
     description:
@@ -238,8 +238,8 @@ export const defaultProductSEO: Record<Locale, PageSEO> = {
 // ============================================================
 // Helper: get product SEO by slug
 // ============================================================
-export function getProductSEO(slug: string, locale: Locale): PageSEO {
-  return productDetailSEO[slug]?.[locale] ?? defaultProductSEO[locale];
+export function getProductSEO(slug: string, locale: string): PageSEO {
+  return productDetailSEO[slug]?.[locale] ?? defaultProductSEO[locale] ?? defaultProductSEO["en"];
 }
 
 // ============================================================

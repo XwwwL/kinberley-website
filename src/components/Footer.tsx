@@ -9,9 +9,9 @@ interface FooterProps {
 
 export default function Footer({ locale }: FooterProps) {
   const isEn = locale === "en";
-  const productNav = productNavTranslations[locale];
-  const nav = navTranslations[locale];
-  const ft = footerTranslations[locale];
+  const productNav = productNavTranslations[locale] ?? productNavTranslations["en"];
+  const nav = navTranslations[locale] ?? navTranslations["en"];
+  const ft = footerTranslations[locale] ?? footerTranslations["en"];
 
   return (
     <footer className="bg-[#0d1f33] text-gray-300">

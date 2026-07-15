@@ -13,7 +13,7 @@ interface BreadcrumbProps {
 }
 
 export default function Breadcrumb({ locale, items }: BreadcrumbProps) {
-  const bc = breadcrumbTranslations[locale];
+  const bc = breadcrumbTranslations[locale] ?? breadcrumbTranslations["en"];
 
   return (
     <nav className="flex items-center text-sm text-gray-400" aria-label="Breadcrumb">

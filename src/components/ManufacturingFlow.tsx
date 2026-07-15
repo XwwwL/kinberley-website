@@ -7,7 +7,7 @@ interface ManufacturingFlowProps {
 
 export default function ManufacturingFlow({ locale }: ManufacturingFlowProps) {
   const isEn = locale === "en";
-  const workflow = localizedContent[locale].manufacturingWorkflow;
+  const workflow = (localizedContent[locale] ?? localizedContent["en"]).manufacturingWorkflow;
   const facilities = companyFacts.manufacturing.facilities;
 
   return (

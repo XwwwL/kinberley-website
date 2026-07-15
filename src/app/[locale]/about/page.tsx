@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: AboutPageProps): Promise<Meta
   if (!isValidLocale(locale)) return {};
   const l = locale as Locale;
   const isEn = l === "en";
-  const seo = aboutSEO[l];
+  const seo = aboutSEO[l] ?? aboutSEO["en"];
 
   return {
     title: seo.title,
@@ -48,8 +48,8 @@ export default async function AboutPage({ params }: AboutPageProps) {
   const isEn = l === "en";
 
   const t = aboutTranslations[l];
-  const content = localizedContent[l];
-  const tableLabels = tableInfoTranslations[l];
+  const content = localizedContent[l] ?? localizedContent["en"];
+  const tableLabels = tableInfoTranslations[l] ?? tableInfoTranslations["en"];
   const staffLabel = isEn
     ? `GM: ${companyFacts.staff.generalManager}, Sales: ${companyFacts.staff.sales}, Production: ${companyFacts.staff.production}`
     : `总经理: ${companyFacts.staff.generalManager}, 销售: ${companyFacts.staff.sales}, 生产: ${companyFacts.staff.production}`;

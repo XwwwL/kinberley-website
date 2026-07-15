@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: MfgPageProps): Promise<Metada
   if (!isValidLocale(locale)) return {};
   const l = locale as Locale;
   const isEn = l === "en";
-  const seo = manufacturingSEO[l];
+  const seo = manufacturingSEO[l] ?? manufacturingSEO["en"];
 
   return {
     title: seo.title,
@@ -48,7 +48,7 @@ export default async function ManufacturingPage({ params }: MfgPageProps) {
   const l = locale as Locale;
   const isEn = l === "en";
 
-  const t = mfgTranslations[l];
+  const t = mfgTranslations[l] ?? mfgTranslations["en"];
 
   return (
     <>
