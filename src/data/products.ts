@@ -143,7 +143,7 @@ export const productCategories: ProductCategory[] = [
     slug: "swimsuit-connecting-buckle",
     images: {
       main: "/images/swimsuit-connecting-buckle/1.jpg",
-      grid: Array.from({ length: 52 }, (_, i) => `/images/swimsuit-connecting-buckle/${i + 1}.jpg` ),
+      grid: Array.from({ length: 54 }, (_, i) => `/images/swimsuit-connecting-buckle/${i + 1}.jpg` ),
     },
     content: {
       en: {
@@ -296,7 +296,7 @@ export const productCategories: ProductCategory[] = [
     slug: "hardware-brooch",
     images: {
       main: "/images/hardware-brooch/1.jpg",
-      grid: Array.from({ length: 32 }, (_, i) => `/images/hardware-brooch/${i + 1}.jpg` ),
+      grid: Array.from({ length: 38 }, (_, i) => `/images/hardware-brooch/${i + 1}.jpg` ),
     },
     content: {
       en: {
